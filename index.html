@@ -1,0 +1,89 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .color_red { color: red; }
+        .color_blue { color: blue; }
+        .is-loading { background: yellow;}
+    </style>
+</head>
+<body>
+    <div id="root">
+        <h1>All Tasks</h1>
+        <ul>
+            <li v-for="task in tasks" v-if="task.completed" v-text="task.description"></li>
+        </ul>
+
+        <h1>incompleteTasks</h1>
+        <ul>
+            <li v-for="task in tasks" v-text="task.description"></li>
+        </ul>
+        
+
+        <input type="text" id="input" v-model="message">
+        <h1 :class="className">Hello World</h1>
+
+        <p>The value of the input is: {{ message }}.</p>
+        <ul>
+            <li v-for="name in names">{{ name }}</li>
+            <li v-for="name in names" v-text="name"></li>
+        </ul>
+
+        <h1>{{ reversedMessage }}</h1>
+
+        <input type="text" id="input" v-model="newName">
+
+        <button v-on:click="addName">Add Name</button>
+        <!-- below is the shorthand and more common syntax for the line above -->
+        <button @click="addName">Add Name</button>
+
+        <button v-bind:title="title">Hover Over Me</button>
+        <!-- below is shorthand and more common syntax for the line above -->
+        <button :title="title">Hover Over Me</button>
+        <button :class="{ 'is-loading': isLoading }" @click="toggleClass">Background Change</button>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+
+
+        new Vue({
+            el:'#root',
+            data: {
+                message: 'Hello World',
+                names: ['Joe', 'Fred', 'Jane', 'Mary'],
+                newName: "",
+                title: 'Now the title is being set through JS',
+                className: 'color_red',
+                isLoading: false,
+                tasks: [
+                    {description: 't1', completed: false},
+                    {description: 't2', completed: true},
+                    {description: 't3', completed: false},
+                    {description: 't4', completed: true},
+                    {description: 't5', completed: false},
+                ]
+            },
+            methods: {
+                addName() {
+                    this.names.push(this.newName);
+                    this.newName = '';
+                },
+                toggleClass() {
+                    this.isLoading= !this.isLoading;
+                }
+            },
+            computed: {
+                reversedMessage() {
+                    return this.message.split('').reverse().join('');
+                }
+
+                
+            }
+        })
+    </script>
+</body>
+</html>
