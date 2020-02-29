@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .color_red { color: red; }
+        .color_blue { color: blue; }
+        .is-loading { background: yellow;}
+    </style>
+</head>
+<body>
+    <div id="root">
+        {{ message }}
+        <h1>{{ reverseWord }}</h1>
+        <h2>{{ num }}</h2>
+        <button @click="{{ add }}">add</button>
+        <ul>
+            <h1>v-if tasks</h1>
+            <li v-for="task in tasks" v-if="task.completed" v-text="task.description"></li>
+            <h1>incomplete tasks</h1>
+            <li v-for="task in incompleteTasks" v-text="task.description"></li>
+        </ul>
+    </div>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+
+
+        new Vue({
+            el:'#root',
+            data: {
+                message: "Hello World!",
+                id: null,
+                num: 0,
+                tasks: [
+                    {description: 't1', completed: false},
+                    {description: 't2', completed: true},
+                    {description: 't3', completed: false},
+                    {description: 't4', completed: true},
+                    {description: 't5', completed: false},
+                ]
+            },
+            computed: {
+                reverseWord(){
+                    return this.message.split('').reverse().join('');
+                },
+                add(){
+                    let newnum = this.num++
+                    return newnum
+                },
+                incompleteTasks(){
+                    return this.tasks.filter(task => !task.completed)
+                },
+
+
+            }
+        })
+    </script>
+</body>
+</html>
