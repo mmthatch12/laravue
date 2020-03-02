@@ -1,6 +1,7 @@
 <?php
 
 require 'functions.php';
+require 'classes.php';
 
 // without the htmlspecialchars function this is vulnerable to users injecting scripts into the url 
 $treet = "Hi, my name is " . htmlspecialchars($_GET['name']) . " I live in " . htmlspecialchars($_GET['place']) . "."; 
@@ -33,10 +34,26 @@ $task = [
 
 // kill($task);
 
-bouncer(22);
+$tasks = [
+    new Task('Move to 14'),
+    new Task('Run home'),
+    new Task('Walk the dog'),
+];
 
-kill($task);
+$tasks[0]->completer();
 
+
+new PDO('mysql:host=127.0.0.1;dbname=mytodo', $username, $password);
+
+// $ta = new Task('Get a class working!');
+// $ta->completer();
+// var_dump($ta->isComplete());
+// $ta->completer();
+// var_dump($ta->isComplete());
+// $ta->completer();
+// var_dump($ta->isComplete());
+
+// kill($ta);
 
 
 // var_dump($names);
@@ -51,5 +68,4 @@ kill($task);
 // echo '<pre>';
 // var_dump($names);
 // echo '</pre>';
-
 require 'index.view.php';
