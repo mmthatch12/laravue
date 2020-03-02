@@ -42,8 +42,18 @@ $tasks = [
 
 $tasks[0]->completer();
 
+$username = getenv('username');
+$password = getenv('password');
 
-new PDO('mysql:host=127.0.0.1;dbname=mytodo', $username, $password);
+
+
+try {
+    $pdo = new PDO('mysql:host=127.0.0.1;dbname=mytodo', $username, $password);
+} catch (PDOException $e) {
+    die('Could not connect.');
+}
+
+
 
 // $ta = new Task('Get a class working!');
 // $ta->completer();
