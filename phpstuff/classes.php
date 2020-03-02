@@ -1,5 +1,7 @@
 <?php
 
+require 'Task.php';
+
 class Task {
 
     public $description;
